@@ -4,4 +4,8 @@
     <string name="game">Game</string>
     <string name="play_button">play button</string>
     <string name="player_name">Player name</string>
+    <string name="roll">Roll</string>
+    <string name="or">OR</string>
+    <string name="pass">Pass</string>
+    <string name="coin_icon">coin_icon</string>
 </resources>
