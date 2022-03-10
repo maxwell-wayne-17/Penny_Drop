@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import dev.mwayne.pennydrop.R
 import dev.mwayne.pennydrop.databinding.FragmentPickPlayersBinding
+import dev.mwayne.pennydrop.viewmodels.PickPlayersViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,11 +33,18 @@ class PickPlayersFragment : Fragment() {
         }
     }
 
+
+    private val pickPlayersViewModel
+            by activityViewModels<PickPlayersViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentPickPlayersBinding.inflate(inflater, container, false)
+            .apply {
+                this.vm = pickPlayersViewModel
+            }
 
         return binding.root
     }
