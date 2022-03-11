@@ -41,7 +41,8 @@ class PickPlayersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentPickPlayersBinding.inflate(inflater, container, false)
+        val binding = FragmentPickPlayersBinding
+            .inflate(inflater, container, false)
             .apply {
                 this.vm = pickPlayersViewModel
             }
