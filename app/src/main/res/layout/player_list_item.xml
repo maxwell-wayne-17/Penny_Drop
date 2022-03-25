@@ -19,6 +19,7 @@
             android:id="@+id/checkbox_player_active"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="@={player.isIncluded}"
             android:visibility="@{player.canBeRemoved ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/edit_text_player_name"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +32,7 @@
             android:layout_margin="5dp"
             android:hint="@string/player_name"
             android:inputType="textPersonName"
+            android:text="@={player.playerName}"
             app:layout_constraintEnd_toStartOf="@id/switch_player_type"
             app:layout_constraintStart_toEndOf="@id/checkbox_player_active"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -39,6 +41,7 @@
             android:id="@+id/switch_player_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="@={player.isHuman}"
             android:visibility="@{player.canBeToggled ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/edit_text_player_name"
             app:layout_constraintEnd_toEndOf="parent"
