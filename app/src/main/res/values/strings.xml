@@ -8,4 +8,6 @@
     <string name="or">OR</string>
     <string name="pass">Pass</string>
     <string name="coin_icon">coin_icon</string>
+    <string name="na">N/A</string>
+    <string name="coins_left">coin(s) left</string>
 </resources>
