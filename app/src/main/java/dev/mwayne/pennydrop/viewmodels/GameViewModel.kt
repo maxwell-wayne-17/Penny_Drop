@@ -28,4 +28,12 @@ class GameViewModel: ViewModel() {
             }
         this.canRoll.value = true
     }
+
+    fun roll() {
+        // Implementing later
+    }
+
+    fun pass() {
+        // Implementing later
+    }
 }

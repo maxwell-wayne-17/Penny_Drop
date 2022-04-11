@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="slotNum"
-            type="int" />
+            name="slot"
+            type="dev.mwayne.pennydrop.types.Slot" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,8 @@
             android:id="@+id/bottomViewCoinSlot"
             android:layout_width="0dp"
             android:layout_height="5dp"
-            android:background="@android:color/black"
+            android:background=
+                "@{slot.lastRolled ? @color/colorPrimary : @android:color/black"
             app:layout_constraintEnd_toEndOf="@id/coinImageCoinSlot"
             app:layout_constraintStart_toStartOf="@id/coinImageCoinSlot"
             app:layout_constraintTop_toBottomOf="@id/coinImageCoinSlot" />
@@ -37,7 +38,9 @@
             android:id="@+id/slotNumberCoinSlot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{slotNum + ""}'
+            android:text='@{slot.number + ""}'
+            android:textColor=
+                "@{slot.lastRolled ? @color/colorPrimary : @android:color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@id/coinImageCoinSlot"
             app:layout_constraintStart_toStartOf="@id/coinImageCoinSlot"

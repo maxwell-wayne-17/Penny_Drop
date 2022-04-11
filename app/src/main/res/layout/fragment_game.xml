@@ -34,35 +34,35 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:slotNum="@{1}" />
+                app:slotNum="@{vm.slots[0]}" />
             <include
                 android:id="@+id/coinSlot2"
                 layout="@layout/layout_coin_slot"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:slotNum="@{2}" />
+                app:slotNum="@{vm.slots[1]}" />
             <include
                 android:id="@+id/coinSlot3"
                 layout="@layout/layout_coin_slot"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:slotNum="@{3}" />
+                app:slotNum="@{vm.slots[2]}" />
             <include
                 android:id="@+id/coinSlot4"
                 layout="@layout/layout_coin_slot"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:slotNum="@{4}" />
+                app:slotNum="@{vm.slots[3]}" />
             <include
                 android:id="@+id/coinSlot5"
                 layout="@layout/layout_coin_slot"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:slotNum="@{5}" />
+                app:slotNum="@{vm.slots[4]}" />
 
         </LinearLayout>
 
@@ -141,9 +141,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
+                android:background=
+                    "@{vm.canPass ? @color/colorAccent : @color/plainGray}"
                 android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
+                android:drawableTint="@android:color/white"
+                android:enabled="@{vm.canPass}"
+                android:onClick="@{() -> vm.pass()}"
                 android:padding="10dp"
-                android:text="@string/pass" />
+                android:text="@string/pass"
+                android:textColor="@android:color/white"/>
         </LinearLayout>
 
         <TextView
