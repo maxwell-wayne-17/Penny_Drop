@@ -22,6 +22,8 @@
             android:minWidth="36dp"
             android:minHeight="36dp"
             android:src="@drawable/mdi_bitcoin_black_24dp"
+            android:tint="@{slot.lastRolled ? @color/colorPrimary : @android:color/black}"
+            app:isHidden="@{!slot.canBeFilled || !slot.isFilled}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,8 +31,7 @@
             android:id="@+id/bottomViewCoinSlot"
             android:layout_width="0dp"
             android:layout_height="5dp"
-            android:background=
-                "@{slot.lastRolled ? @color/colorPrimary : @android:color/black"
+            android:background="@{slot.lastRolled ? @color/colorPrimary : @android:color/black}"
             app:layout_constraintEnd_toEndOf="@id/coinImageCoinSlot"
             app:layout_constraintStart_toStartOf="@id/coinImageCoinSlot"
             app:layout_constraintTop_toBottomOf="@id/coinImageCoinSlot" />
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text='@{slot.number + ""}'
             android:textColor=
-                "@{slot.lastRolled ? @color/colorPrimary : @android:color/black"
+                "@{slot.lastRolled ? @color/colorPrimary : @android:color/black}"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@id/coinImageCoinSlot"
             app:layout_constraintStart_toStartOf="@id/coinImageCoinSlot"
