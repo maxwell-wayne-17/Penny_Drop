@@ -6,3 +6,8 @@ data class Slot(
     var isFilled: Boolean = false,
     var lastRolled: Boolean = false
 )
+
+fun List<Slot>.clear() = this.forEach { slot ->
+    slot.isFilled = false
+    slot.lastRolled = false
+}

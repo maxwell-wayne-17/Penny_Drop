@@ -6,9 +6,8 @@ import kotlin.random.Random
 
 object GameHandler {
 
-    fun roll(players: List<Player>,
-             currentPlayer: Player,
-             slots: List<Slot>): Any = // TODO - this should be TurnResult instead of any
+    fun roll(players: List<Player>, currentPlayer: Player, slots: List<Slot>):
+            TurnResult =
         rollDie().let { lastRoll ->
             slots.getOrNull(lastRoll - 1)?.let { slot ->
             if (slot.isFilled) {
@@ -26,18 +25,37 @@ object GameHandler {
 
             } else {
                 if (!currentPlayer.penniesLeft(true)) {
-                    // Player wins
+                    TurnResult(
+                        lastRoll,
+                        currentPlayer = currentPlayer,
+                        coinChangeCount = -1,
+                        isGameOver = true,
+                        turnEnd = TurnEnd.Win,
+                        canRoll = false,
+                        canPass = false
+                    )
                 } else{
-                    // Game continues
+                    TurnResult(
+                        lastRoll,
+                        currentPlayer = currentPlayer,
+                        canRoll = true,
+                        canPass = true,
+                        coinChangeCount = -1
+                    )
                 }
             }
         } ?: TurnResult(isGameOver = true)
     }
 
-    fun pass(
-        players: List<Player>,
-        currentPlayer: Player
-    ): TurnResult { }
+    fun pass(players: List<Player>, currentPlayer: Player) =
+        TurnResult(
+            previousPlayer = currentPlayer,
+            currentPlayer = nextPlayer(players, currentPlayer),
+            playerChanged = true,
+            turnEnd = TurnEnd.Pass,
+            canRoll = true,
+            canPass = false
+        )
 
     private fun rollDie(sides: Int = 6) = Random.nextInt(1, sides + 1)
 
