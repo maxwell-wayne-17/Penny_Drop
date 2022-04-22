@@ -57,8 +57,45 @@ class GameViewModel: ViewModel() {
         }
     }
 
-    fun updateFromGameHandler(turnResult: TurnResult) {
+    private fun updateFromGameHandler(result: TurnResult) {
+        if (result.currentPlayer != null) {
+            currentPlayer.value?.addPennies(result.coinChangeCount ?: 0)
+            currentPlayer.value = result.currentPlayer
+            this.players.forEach { player ->
+                player.isRolling = result.currentPlayer == player
+            }
+        }
 
+        if (result.lastRoll != null) {
+            slots.value?.let { currentSlots ->
+                updateSlots(result, currentSlots, result.lastRoll)
+            }
+        }
+
+        currentTurnText.value = generateTurnText(result)
+        currentStandingsText.value = generateCurrentStandings(this.players)
+
+        canRoll.value = result.canRoll
+        canPass.value = result.canPass
+
+        if (!result.isGameOver && result.currentPlayer?.isHuman == false){
+            canRoll.value = false
+            canPass.value = false
+        }
+    }
+
+    private fun updateSlots(result: TurnResult, currentSlots: List<Slot>, lastRoll: Int){
+        if (result.clearSlots) {
+            currentSlots.clear()
+        }
+        currentSlots.firstOrNull { it.lastRolled }?.apply { lastRolled = false}
+
+        currentSlots.getOrNull(lastRoll - 1)?.also { slot ->
+            if (!result.clearSlots && slot.canBeFilled){ slot.isFilled = true }
+
+            slot.lastRolled = true
+        }
+        slots.notifyChange()
     }
 
     // Mutable live data will only notify a change if the value of it is changed, not if something
