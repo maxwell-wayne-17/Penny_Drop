@@ -16,7 +16,7 @@ data class Player(
     var pennies: Int = defaultPennyCount
 
     fun addPennies(count: Int = 1) {
-        pennies += count
+        pennies += count // Remove this comment
     }
 
     @Ignore
