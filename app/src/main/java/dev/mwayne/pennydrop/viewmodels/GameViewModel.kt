@@ -3,6 +3,7 @@ package dev.mwayne.pennydrop.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dev.mwayne.pennydrop.game.GameHandler
+import dev.mwayne.pennydrop.game.TurnEnd
 import dev.mwayne.pennydrop.game.TurnResult
 import dev.mwayne.pennydrop.types.Player
 import dev.mwayne.pennydrop.types.Slot
@@ -22,6 +23,7 @@ class GameViewModel: ViewModel() {
 
     val currentTurnText = MutableLiveData("")
     val currentStandingsText = MutableLiveData("")
+    private var clearText = false
 
     fun startGame(playersForNewGame: List<Player>) {
         this.players = playersForNewGame
@@ -81,6 +83,29 @@ class GameViewModel: ViewModel() {
         if (!result.isGameOver && result.currentPlayer?.isHuman == false){
             canRoll.value = false
             canPass.value = false
+        }
+    }
+
+    private fun generateTurnText(result: TurnResult): String {
+        if (clearText) currentTurnText.value = ""
+        clearText = result.turnEnd!= null
+
+        val currentText = currentTurnText.value ?: ""
+        val currentPlayerName = result.currentPlayer?.playerName ?: "???"
+
+        return when {
+            result.isGameOver ->
+                """
+                |Game Over!
+                |$currentPlayerName is the winner!
+                |
+                |${generateCurrentStandings(this.players, "Final Scores:\n")}
+                }}
+                """.trimMargin()
+            result.turnEnd == TurnEnd.Bust -> "$currentText\n$currentPlayerName busted!"
+            result.turnEnd == TurnEnd.Pass -> "$currentText\n$currentPlayerName passed."
+            result.lastRoll != null -> "$currentText\n$currentPlayerName rolled a ${result.lastRoll}."
+            else -> ""
         }
     }
 
