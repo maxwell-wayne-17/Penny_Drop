@@ -10,8 +10,7 @@ data class AI(val name: String, val rollAgain: (slots: List<Slot>) -> Boolean) {
     companion object {
         @JvmStatic
         val basicAI = listOf(
-            AI("TwoFace") { slots -> slots.fullSlots() < 3 ||
-                    (slots.fullSlots() == 3 && coinFlipIsHeads()) },
+            AI("TwoFace") { slots -> slots.fullSlots() < 3 || (slots.fullSlots() == 3 && coinFlipIsHeads()) },
             AI("No Go Noah") { slots -> slots.fullSlots() == 0 },
             AI("Bail Out Beulah") { slots -> slots.fullSlots() <= 1 },
             AI("Fearful Fred") { slots -> slots.fullSlots() <= 2 },
