@@ -68,4 +68,16 @@ object GameHandler {
             return players[nextIndex]
     }
 
+    fun playAITurn(players: List<Player>, currentPlayer: Player, slots: List<Slot>,
+                   canPass: Boolean = false): TurnResult? =
+        currentPlayer.selectedAI?.let { ai ->
+            if (!canPass || ai.rollAgain(slots)) {
+                roll(players, currentPlayer, slots)
+            } else {
+                pass(players, currentPlayer)
+            }
+        }
+
+
+
 }
