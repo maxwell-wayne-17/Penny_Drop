@@ -4,10 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import dev.mwayne.pennydrop.types.Player
 import kotlinx.coroutines.CoroutineScope
 
 @Database(
-    entities = [],
+    entities = [Game::class, Player::class, GameStatus::class],
     version = 1,
     exportSchema = false
 )

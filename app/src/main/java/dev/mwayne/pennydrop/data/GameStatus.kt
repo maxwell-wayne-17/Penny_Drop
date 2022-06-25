@@ -1,5 +1,6 @@
 package dev.mwayne.pennydrop.data
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import dev.mwayne.pennydrop.types.Player
@@ -23,7 +24,7 @@ import dev.mwayne.pennydrop.types.Player
 
 data class GameStatus(
     val gameId: Long,
-    val playerId: Long,
+    @ColumnInfo(index = true) val playerId: Long,
     val gamePlayerNumber: Int,
     val isRolling: Boolean = false,
     val pennies: Int = Player.defaultPennyCount
